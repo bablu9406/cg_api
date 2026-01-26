@@ -13,3 +13,11 @@ router.post("/register", register);
 router.post("/login", login);
 
 module.exports = router;
+const authMiddleware = require("../middleware/authMiddleware");
+
+router.get("/profile", authMiddleware, (req, res) => {
+  res.json({
+    message: "Protected route accessed",
+    userId: req.userId
+  });
+});
